@@ -14,6 +14,5 @@
 
   Hello
   $END$
-  1
   </body>
 </html>
