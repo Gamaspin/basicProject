@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="co.kr"/>
+
+    <!-- Transaction -->
+    <!-- transactionManager Bean선언은 applicationContext에 있음 -->
+<!--    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
+
+    <!-- 이 resources는 컨트롤러를 읽어들이지 않을것 -->
+    <mvc:resources mapping="/web_resources/**" location="/web_resources/" />
+<!--    <mvc:resources mapping="/files/**" location="/files/" />
+    <mvc:resources mapping="/popup/**" location="/WEB-INF/views/popup/" />-->
+
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/" /> &lt;!&ndash; 사이트 첫 화면은 굳이 인터셉터 할 필요 없기 때문에 제외 해야 한다. &ndash;&gt;
+            <mvc:exclude-mapping path="/login/**" /> &lt;!&ndash; 로그인 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/mobile/login/**" /> &lt;!&ndash; 모바일 로그인 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/home/**" /> &lt;!&ndash; 홈페이지 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/popup/**" /> &lt;!&ndash; 홈페이지 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/files/**" /> &lt;!&ndash; 템플릿+다운로드한 파일에 관련된 폴더도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/web_resources/**" /> &lt;!&ndash; 홈페이지 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/contract/**" /> &lt;!&ndash; 계약 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/info/**" /> &lt;!&ndash; 계약 시 작성하는 정보 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/enter_contract/**" /> &lt;!&ndash; 계약 시 작성하는 정보 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/join_contract/**" /> &lt;!&ndash; 계약 시 작성하는 정보 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/common_js/**" /> &lt;!&ndash; commonjs 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/mContract/**" /> &lt;!&ndash; mContract 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+
+            <bean class="co.kr.login.LoginInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/" /> &lt;!&ndash; 사이트 첫 화면은 굳이 인터셉터 할 필요 없기 때문에 제외 해야 한다. &ndash;&gt;
+            <mvc:exclude-mapping path="/contract/**" /> &lt;!&ndash; 계약 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/login/**" /> &lt;!&ndash; 로그인 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/logout/**" /> &lt;!&ndash; 로그인 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/mobile/**" /> &lt;!&ndash; 모바일 로그인 페이지도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/home/**" /> &lt;!&ndash; 홈페이지 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/popup/**" /> &lt;!&ndash; 홈페이지 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/files/**" /> &lt;!&ndash; 템플릿+다운로드한 파일에 관련된 폴더도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/web_resources/**" /> &lt;!&ndash; 홈페이지 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+            <mvc:exclude-mapping path="/common_js/**" /> &lt;!&ndash; commonjs 관련 화면도 인터셉터에서 제외 &ndash;&gt;
+
+            &lt;!&ndash; 그룹웨어 주소목록 제외 시작 &ndash;&gt;
+            <mvc:exclude-mapping path="/groupware/**" /> 
+            <mvc:exclude-mapping path="/approval/**" />
+            <mvc:exclude-mapping path="/my_attendance/**" />
+            <mvc:exclude-mapping path="/my_salary/**" /> 
+            <mvc:exclude-mapping path="/my_certi/**" /> 
+            <mvc:exclude-mapping path="/my_calendar/**" /> 
+            <mvc:exclude-mapping path="/doc/**" /> 
+            <mvc:exclude-mapping path="/approval_setting/**" /> 
+            <mvc:exclude-mapping path="/approval_sign/**" /> 
+            <mvc:exclude-mapping path="/expense_mng/**" /> 
+            <mvc:exclude-mapping path="/claim_limit/**" /> 
+            <mvc:exclude-mapping path="/claim_balance/**" /> 
+            <mvc:exclude-mapping path="/doc_no/**" /> 
+            <mvc:exclude-mapping path="/community/**" /> 
+            <mvc:exclude-mapping path="/emp_approval/**" />
+            <mvc:exclude-mapping path="/my_attach/**" />
+            <mvc:exclude-mapping path="/my_contract/**" />
+            &lt;!&ndash; 그룹웨어 주소목록 제외 종료 &ndash;&gt;
+            
+            &lt;!&ndash;hrms 주소목록 제외 시작&ndash;&gt;
+            <mvc:exclude-mapping path="/hrms/**" />
+            <mvc:exclude-mapping path="/code/**" />
+            <mvc:exclude-mapping path="/emp/**" /> 
+            <mvc:exclude-mapping path="/social/**" /> 
+            <mvc:exclude-mapping path="/guaranty/**" /> 
+            <mvc:exclude-mapping path="/layoff/**" /> 
+            <mvc:exclude-mapping path="/substitute/**" /> 
+            <mvc:exclude-mapping path="/attend/**" /> 
+            <mvc:exclude-mapping path="/salary/**" /> 
+            <mvc:exclude-mapping path="/certi/**" /> 
+            <mvc:exclude-mapping path="/board/**" /> 
+            <mvc:exclude-mapping path="/board_reply/**" />
+            <mvc:exclude-mapping path="/division/**" />
+            <mvc:exclude-mapping path="/dept/**" /> 
+            <mvc:exclude-mapping path="/client/**" /> 
+            <mvc:exclude-mapping path="/center/**" /> 
+            <mvc:exclude-mapping path="/team/**" /> 
+            <mvc:exclude-mapping path="/emp_mng_center/**" /> 
+            <mvc:exclude-mapping path="/center_to/**" /> 
+            <mvc:exclude-mapping path="/screeninfo/**" /> 
+            <mvc:exclude-mapping path="/authority_screen/**" /> 
+            <mvc:exclude-mapping path="/code/**" /> 
+            <mvc:exclude-mapping path="/empScreen/**" /> 
+            <mvc:exclude-mapping path="/work_id/**" /> 
+            <mvc:exclude-mapping path="/doc_move/**" /> 
+            <mvc:exclude-mapping path="/annual/**" /> 
+            <mvc:exclude-mapping path="/comp_holiday/**" /> 
+            <mvc:exclude-mapping path="/sub_holiday/**" /> 
+            <mvc:exclude-mapping path="/expense/**" /> 
+            <mvc:exclude-mapping path="/expense_summary/**" /> 
+            <mvc:exclude-mapping path="/expense_cash/**" />
+            <mvc:exclude-mapping path="/expense_cash_acc/**" />
+            <mvc:exclude-mapping path="/expense_file/**" />
+            <mvc:exclude-mapping path="/expense_claim/**" /> 
+            <mvc:exclude-mapping path="/expense_voucher/**" /> 
+            <mvc:exclude-mapping path="/corp_card/**" /> 
+            <mvc:exclude-mapping path="/corp_card_site/**" />
+            <mvc:exclude-mapping path="/trainee/**" />
+            <mvc:exclude-mapping path="/myinfo/**" />
+            <mvc:exclude-mapping path="/center_doc/**" />
+            <mvc:exclude-mapping path="/contract_mng/**" />
+            <mvc:exclude-mapping path="/asp/**" />
+            <mvc:exclude-mapping path="/salary_calc/**" />
+            <mvc:exclude-mapping path="/asp_mng/**" />
+            <mvc:exclude-mapping path="/work_time_mng/**" />
+
+            &lt;!&ndash; hrms 주소목록 제외 종료 &ndash;&gt;
+            <bean class="co.kr.contract.TraineeLoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxInMemorySize" value ="1000000000"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+        <property name="contentType" value="text/html; charset=UTF-8" />
+        <property name="order" value="1" />
+    </bean>
+
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="file" fileName="/web/projects/hrms2020/logs/hrms2020.log"
+                     filePattern="/web/projects/hrms2020/logs/hrms2020_%d{yyyyMMdd}.log">
+            <!-- 로그 파일 생성, 리눅스 환경에서는 arumilee_HRMS 라는 폴더안에 만들어지고,
+            윈도우 환경에선 c: 밑에 바로 만들어진다-->
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!--  Log everything in custom package -->
+        <Logger name="co.kr" level="info" additivity="false">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+        </Logger>
+
+        <!-- Log everything in Spring Boot -->
+        <Logger name="org.springframework.web" level="info" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="org.springframework.core" level="debug" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <logger name="org.mybatis" level="info" additivity="false" >
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </logger>
+
+        <!-- 만든 패키지는 무조건 찍기 -->
+        <logger name="co.kr" level="DEBUG" additivity="false" >
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </logger>
+
+        <Root level="error">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+</Configuration>

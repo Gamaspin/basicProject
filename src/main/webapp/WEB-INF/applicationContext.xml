@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!--서버용 start-->
+    <!--   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+           <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+           <property name="url"
+                     value="jdbc:mariadb://localhost:3306/ks_hrms?useUnicode=yes&amp;characterEncoding=UTF-8&amp;verifyServerCertificate=false&amp;useSSL=false"/> &lt;!&ndash; DB에 삽입하는 데이터가 한글이기 때문에 Unicode를 사용하고 UTF-8로 인코딩한다. &ndash;&gt;
+           <property name="username" value="hrms_user"/>
+           <property name="password" value="Hrms_2020_@)@)"/>
+           <property name="connectionProperties" value="characterEncoding=utf8" />
+       </bean>
+
+       <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+           <property name="dataSource" ref="dataSource"/> &lt;!&ndash; name:sqlsession bean에서 사용할 이름, ref:위의 연결설정에서 정해진 dataSource를 참조 &ndash;&gt;
+           <property name="mapperLocations" value="classpath:mapper/*.xml"/> &lt;!&ndash; 앞으로 참조할 sql문이 위치할 장소 &ndash;&gt;
+           <property name="configurationProperties">&lt;!&ndash; mapper에서 양방향 암호화 사용 시 사용될 복호화 키 &ndash;&gt;
+               <props>
+                   <prop key="cryptKey">'Gksrnr_rhdyd_!@3'</prop> &lt;!&ndash; 한국_고용_123 : 93 TRILLION YEARS&ndash;&gt;
+               </props>
+           </property>
+       </bean>-->
+    <!--서버용 end-->
+
+    <!-- 로컬 확인용 start-->
+    <bean id="dataSource-mariadb" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+        <property name="jdbcUrl" value="jdbc:log4jdbc:mariadb://localhost:3306/ryudb?useUnicode=yes&amp;characterEncoding=UTF-8&amp;verifyServerCertificate=false&amp;useSSL=false"/> <!-- DB에 삽입하는 데이터가 한글이기 때문에 Unicode를 사용하고 UTF-8로 인코딩한다. -->
+        <!--<property name="username" value="hrms_user"/>
+        <property name="password" value="Hrms_2020_@)@)"/>-->
+        <property name="username" value="root"/>
+        <property name="password" value="admin"/>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop>
+                <prop key="prepStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+                <prop key="useServerPrepStmts">true</prop>
+                <prop key="useLocalSessionState">true</prop>
+                <prop key="rewriteBatchedStatements">true</prop>
+                <prop key="cacheResultSetMetadata">true</prop>
+                <prop key="cacheServerConfiguration">true</prop>
+                <prop key="elideSetAutoCommits">true</prop>
+                <prop key="maintainTimeStats">false</prop>
+                <prop key="maxTotal">100</prop>				<!-- 동시에 사용할 수 있는 최대 커넥션 개수(기본값: 8) -->
+                <prop key="maxWaitMillis">10000</prop>
+                <prop key="maxIdle">30</prop>				<!-- 커넥션 풀에 반납할 때 최대로 유지될 수 있는 커넥션 개수(기본값: 8) -->
+                <prop key="timeBetweenEvictionRunsMillis">600000"</prop>
+                <prop key="poolPreparedStatements">true</prop>
+                <prop key="maxOpenPreparedStatements">50</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy">
+        <constructor-arg ref="dataSource-mariadb" />
+    </bean>
+
+    <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/> <!-- name:sqlsession bean에서 사용할 이름, ref:위의 연결설정에서 정해진 dataSource를 참조 -->
+<!--
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/> &lt;!&ndash; 앞으로 참조할 sql문이 위치할 장소 &ndash;&gt;
+-->
+        <property name="configurationProperties"><!-- mapper에서 양방향 암호화 사용 시 사용될 복호화 키 -->
+            <props>
+                <prop key="cryptKey">'Gksrnr_rhdyd_!@3'</prop> <!-- 한국_고용_123 : 93 TRILLION YEARS-->
+            </props>
+        </property>
+    </bean>
+    <!--로컬 확인용 end-->
+
+    <!-- 서버/로컬 공용 -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="SqlSessionFactory"/>
+    </bean>
+
+
+    <!-- Transaction -->
+    <!-- annotationt스캔은 dispatcher-servlet에 있음 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!--    메일관련 설정-->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="mail.kbsjob.co.kr" />
+        <property name="port" value="587" />
+        <property name="username" value="notice@kbsjob.co.kr" />
+        <property name="password" value="rhdwl_1234*" />
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.ssl.trust">mail.kbsjob.co.kr</prop>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.starttls.required">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
