@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+    <resultMap id="BoardResultMap" type="BoardDTO">
+        <id property="bno" column="bno"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="writer" column="writer"/>
+        <result property="regdate" column="regdate"/>
+        <result property="viewcnt" column="viewcnt"/>
+    </resultMap>
+
+    <insert id="write">
+        insert into tbl_board(
+            bno,
+            title,
+            content,
+            writer,
+            regdate,
+            viewcnt
+        )values(
+                   #{bno},
+                   #{title},
+                   #{content},
+                   #{writer},
+                   #{regdate},
+                   '22'
+               )
+
+    </insert>
+
+<!--    <select id="getBno" resultType="java.lang.Integer">
+        SELECT MAX(bno) FROM tbl_board
+    </select>-->
+
+    <select id="read" resultType="BoardDTO">
+        select
+            bno,
+            title,
+            content,
+            writer,
+            regdate,
+            viewcnt
+        from tbl_board where bno = #{bno}
+    </select>
+
+    <update id="update">
+        update tbl_board
+        set
+            title = #{title},
+            writer = #{writer},
+            content = #{content}
+        where
+            bno = #{bno}
+    </update>
+
+    <select id="listAll" resultType="BoardDTO">
+        select
+            bno,
+            title,
+            content,
+            writer,
+            regdate,
+            viewcnt
+        from tbl_board
+        order by
+                 bno desc
+    </select>
+
+
+    <delete id="delete">
+        delete
+        from
+            tbl_board
+        where
+            bno = #{bno}
+    </delete>
+
+    <update id="updateViewcnt">
+
+        update tbl_board set viewcnt = viewcnt+1 where bno = #{bno}
+
+    </update>
+
+
+    <select id="countingArticle" resultType="java.lang.Integer">
+        SELECT
+               COUNT(*)
+        FROM
+             `tbl_board`;
+
+    </select>
+
+
+
+
+
+
+</mapper>
