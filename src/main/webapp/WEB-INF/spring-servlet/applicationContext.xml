@@ -32,11 +32,9 @@
     <!-- 로컬 확인용 start-->
     <bean id="dataSource-mariadb" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-        <property name="jdbcUrl" value="jdbc:log4jdbc:mariadb://localhost:3306/ryudb?useUnicode=yes&amp;characterEncoding=UTF-8&amp;verifyServerCertificate=false&amp;useSSL=false"/> <!-- DB에 삽입하는 데이터가 한글이기 때문에 Unicode를 사용하고 UTF-8로 인코딩한다. -->
-        <!--<property name="username" value="hrms_user"/>
-        <property name="password" value="Hrms_2020_@)@)"/>-->
-        <property name="username" value="root"/>
-        <property name="password" value="admin"/>
+        <property name="jdbcUrl" value="jdbc:log4jdbc:mariadb://10.10.10.109:3306/hansung_ryu?useUnicode=yes&amp;characterEncoding=UTF-8&amp;verifyServerCertificate=false&amp;useSSL=false"/> <!-- DB에 삽입하는 데이터가 한글이기 때문에 Unicode를 사용하고 UTF-8로 인코딩한다. -->
+        <property name="username" value="hrms_user"/>
+        <property name="password" value="Hrms_2020_@)@)"/>
         <property name="dataSourceProperties">
             <props>
                 <prop key="cachePrepStmts">true</prop>
@@ -65,9 +63,9 @@
 
     <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/> <!-- name:sqlsession bean에서 사용할 이름, ref:위의 연결설정에서 정해진 dataSource를 참조 -->
-<!--
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/> &lt;!&ndash; 앞으로 참조할 sql문이 위치할 장소 &ndash;&gt;
--->
+        <!--
+                <property name="mapperLocations" value="classpath:mapper/*.xml"/> &lt;!&ndash; 앞으로 참조할 sql문이 위치할 장소 &ndash;&gt;
+        -->
         <property name="configurationProperties"><!-- mapper에서 양방향 암호화 사용 시 사용될 복호화 키 -->
             <props>
                 <prop key="cryptKey">'Gksrnr_rhdyd_!@3'</prop> <!-- 한국_고용_123 : 93 TRILLION YEARS-->

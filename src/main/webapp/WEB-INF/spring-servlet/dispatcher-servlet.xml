@@ -14,16 +14,16 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <mvc:annotation-driven/>
-    <context:component-scan base-package="co.kr"/>
+    <context:component-scan base-package="co.kr.crudboard"/>
 
     <!-- Transaction -->
     <!-- transactionManager Bean선언은 applicationContext에 있음 -->
-<!--    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
+    <!--    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
 
     <!-- 이 resources는 컨트롤러를 읽어들이지 않을것 -->
     <mvc:resources mapping="/web_resources/**" location="/web_resources/" />
-<!--    <mvc:resources mapping="/files/**" location="/files/" />
-    <mvc:resources mapping="/popup/**" location="/WEB-INF/views/popup/" />-->
+    <!--    <mvc:resources mapping="/files/**" location="/files/" />
+        <mvc:resources mapping="/popup/**" location="/WEB-INF/views/popup/" />-->
 
     <!--<mvc:interceptors>
         <mvc:interceptor>
@@ -58,62 +58,62 @@
             <mvc:exclude-mapping path="/common_js/**" /> &lt;!&ndash; commonjs 관련 화면도 인터셉터에서 제외 &ndash;&gt;
 
             &lt;!&ndash; 그룹웨어 주소목록 제외 시작 &ndash;&gt;
-            <mvc:exclude-mapping path="/groupware/**" /> 
+            <mvc:exclude-mapping path="/groupware/**" />
             <mvc:exclude-mapping path="/approval/**" />
             <mvc:exclude-mapping path="/my_attendance/**" />
-            <mvc:exclude-mapping path="/my_salary/**" /> 
-            <mvc:exclude-mapping path="/my_certi/**" /> 
-            <mvc:exclude-mapping path="/my_calendar/**" /> 
-            <mvc:exclude-mapping path="/doc/**" /> 
-            <mvc:exclude-mapping path="/approval_setting/**" /> 
-            <mvc:exclude-mapping path="/approval_sign/**" /> 
-            <mvc:exclude-mapping path="/expense_mng/**" /> 
-            <mvc:exclude-mapping path="/claim_limit/**" /> 
-            <mvc:exclude-mapping path="/claim_balance/**" /> 
-            <mvc:exclude-mapping path="/doc_no/**" /> 
-            <mvc:exclude-mapping path="/community/**" /> 
+            <mvc:exclude-mapping path="/my_salary/**" />
+            <mvc:exclude-mapping path="/my_certi/**" />
+            <mvc:exclude-mapping path="/my_calendar/**" />
+            <mvc:exclude-mapping path="/doc/**" />
+            <mvc:exclude-mapping path="/approval_setting/**" />
+            <mvc:exclude-mapping path="/approval_sign/**" />
+            <mvc:exclude-mapping path="/expense_mng/**" />
+            <mvc:exclude-mapping path="/claim_limit/**" />
+            <mvc:exclude-mapping path="/claim_balance/**" />
+            <mvc:exclude-mapping path="/doc_no/**" />
+            <mvc:exclude-mapping path="/community/**" />
             <mvc:exclude-mapping path="/emp_approval/**" />
             <mvc:exclude-mapping path="/my_attach/**" />
             <mvc:exclude-mapping path="/my_contract/**" />
             &lt;!&ndash; 그룹웨어 주소목록 제외 종료 &ndash;&gt;
-            
+
             &lt;!&ndash;hrms 주소목록 제외 시작&ndash;&gt;
             <mvc:exclude-mapping path="/hrms/**" />
             <mvc:exclude-mapping path="/code/**" />
-            <mvc:exclude-mapping path="/emp/**" /> 
-            <mvc:exclude-mapping path="/social/**" /> 
-            <mvc:exclude-mapping path="/guaranty/**" /> 
-            <mvc:exclude-mapping path="/layoff/**" /> 
-            <mvc:exclude-mapping path="/substitute/**" /> 
-            <mvc:exclude-mapping path="/attend/**" /> 
-            <mvc:exclude-mapping path="/salary/**" /> 
-            <mvc:exclude-mapping path="/certi/**" /> 
-            <mvc:exclude-mapping path="/board/**" /> 
+            <mvc:exclude-mapping path="/emp/**" />
+            <mvc:exclude-mapping path="/social/**" />
+            <mvc:exclude-mapping path="/guaranty/**" />
+            <mvc:exclude-mapping path="/layoff/**" />
+            <mvc:exclude-mapping path="/substitute/**" />
+            <mvc:exclude-mapping path="/attend/**" />
+            <mvc:exclude-mapping path="/salary/**" />
+            <mvc:exclude-mapping path="/certi/**" />
+            <mvc:exclude-mapping path="/board/**" />
             <mvc:exclude-mapping path="/board_reply/**" />
             <mvc:exclude-mapping path="/division/**" />
-            <mvc:exclude-mapping path="/dept/**" /> 
-            <mvc:exclude-mapping path="/client/**" /> 
-            <mvc:exclude-mapping path="/center/**" /> 
-            <mvc:exclude-mapping path="/team/**" /> 
-            <mvc:exclude-mapping path="/emp_mng_center/**" /> 
-            <mvc:exclude-mapping path="/center_to/**" /> 
-            <mvc:exclude-mapping path="/screeninfo/**" /> 
-            <mvc:exclude-mapping path="/authority_screen/**" /> 
-            <mvc:exclude-mapping path="/code/**" /> 
-            <mvc:exclude-mapping path="/empScreen/**" /> 
-            <mvc:exclude-mapping path="/work_id/**" /> 
-            <mvc:exclude-mapping path="/doc_move/**" /> 
-            <mvc:exclude-mapping path="/annual/**" /> 
-            <mvc:exclude-mapping path="/comp_holiday/**" /> 
-            <mvc:exclude-mapping path="/sub_holiday/**" /> 
-            <mvc:exclude-mapping path="/expense/**" /> 
-            <mvc:exclude-mapping path="/expense_summary/**" /> 
+            <mvc:exclude-mapping path="/dept/**" />
+            <mvc:exclude-mapping path="/client/**" />
+            <mvc:exclude-mapping path="/center/**" />
+            <mvc:exclude-mapping path="/team/**" />
+            <mvc:exclude-mapping path="/emp_mng_center/**" />
+            <mvc:exclude-mapping path="/center_to/**" />
+            <mvc:exclude-mapping path="/screeninfo/**" />
+            <mvc:exclude-mapping path="/authority_screen/**" />
+            <mvc:exclude-mapping path="/code/**" />
+            <mvc:exclude-mapping path="/empScreen/**" />
+            <mvc:exclude-mapping path="/work_id/**" />
+            <mvc:exclude-mapping path="/doc_move/**" />
+            <mvc:exclude-mapping path="/annual/**" />
+            <mvc:exclude-mapping path="/comp_holiday/**" />
+            <mvc:exclude-mapping path="/sub_holiday/**" />
+            <mvc:exclude-mapping path="/expense/**" />
+            <mvc:exclude-mapping path="/expense_summary/**" />
             <mvc:exclude-mapping path="/expense_cash/**" />
             <mvc:exclude-mapping path="/expense_cash_acc/**" />
             <mvc:exclude-mapping path="/expense_file/**" />
-            <mvc:exclude-mapping path="/expense_claim/**" /> 
-            <mvc:exclude-mapping path="/expense_voucher/**" /> 
-            <mvc:exclude-mapping path="/corp_card/**" /> 
+            <mvc:exclude-mapping path="/expense_claim/**" />
+            <mvc:exclude-mapping path="/expense_voucher/**" />
+            <mvc:exclude-mapping path="/corp_card/**" />
             <mvc:exclude-mapping path="/corp_card_site/**" />
             <mvc:exclude-mapping path="/trainee/**" />
             <mvc:exclude-mapping path="/myinfo/**" />
