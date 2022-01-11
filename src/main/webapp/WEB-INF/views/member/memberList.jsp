@@ -5,705 +5,593 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<!DOCTYPE html>
 <html lang="ko">
-
-<!-- begin::Head -->
 <head>
-    <meta charset="utf-8" />
-    <title>회원 목록</title>
-
-
-    <meta name="description" content="Static table examples">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="/web_resources/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/bootstrap-datepicker_new.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/daterangepicker.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/line-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/flaticon.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/flaticon2.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/all.min.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/style.bundle_new.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/light.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/dark.css" rel="stylesheet" type="text/css" />
-    <link href="/web_resources/css/common.css?v=20191104" rel="stylesheet" type="text/css" />
-
-    <!-- 2019-0806 jquery.js > 하단 에서 상단으로 위치 변경: 모달팝업 인풋박스 아래 텍스트 유동적 나오는 소스 포함+기존 셀렉트 박스 등 -->
-    <script src="/web_resources/bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
-    <!-- 2019-0806  bootstrapvalidator.min.js > 모달팝업 인풋박스 아래 유동적 테스트 나오게 하는 소스 추가 -->
-    <script src="/web_resources/bower_components/jquery/dist/bootstrapvalidator.min.js"></script>
-    <link rel="shortcut icon" href="/web_resources/images/favicon.ico" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ver2</title>
     <style>
-        .kt-header--fixed.kt-aside--minimize .kt-header {
-            /* left: 70px;*/
-            left: 0px !important;
-            -webkit-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-        }
-        .kt-aside--enabled .kt-header.kt-header--fixed {
-            /* left: 255px; */
-            left: 0px !important;
-        }
-        .kt-aside__brand {
-            background-color: #FFFFFF !important;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            width: 255px;
-        }
-
-        .kt-aside__brand .kt-aside__brand-tools .kt-aside__brand-aside-toggler svg {
-            height: 25px;
-            width: 25px;
-            margin-right: -4px;
-        }
     </style>
+    <!-- CSS -->
+    <link href="/web_resources/css/setting.css" rel="stylesheet" type="text/css">
+    <link href="/web_resources/css/common.css" rel="stylesheet" type="text/css">
+    <link href="/web_resources/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/web_resources/css/line-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/web_resources/css/scrollbar.css" rel="stylesheet" type="text/css">
+    <link href="/web_resources/css/daterangepicker.css" rel="stylesheet" type="text/css">
+    <!-- jquery -->
+    <script src="/web_resources/js/jquery-2.1.3.min.js"></script>
+    <!-- javascript(캘린더) -->
+    <script src="/web_resources/assets/vendors/general/moment/min/moment.min.js" type="text/javascript"></script>
+    <script src="/web_resources/assets/vendors/general/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <script src="/web_resources/assets/app/custom/general/crud/forms/widgets/bootstrap-daterangepicker.js" type="text/javascript"></script>
+
+    <link rel="shortcut icon" href="/web_resources/images/favicon.ico" />
 </head>
-<body class="kt-header--fixed kt-header-mobile--fixed kt-subheader--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
-<!-- begin:: Page -->
-<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+<body>
+<div class="container">
+    <!-- ------Side Menu 왼쪽 사이드메뉴 영역 시작------ -->
 
 
 
-    <!-- hader 시작  -->
-    <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed">
-
-
-
-
-
-        <!--  로고 접기 기능 시작 -->
-        <div class="kt-aside__brand kt-grid__item" id="kt_aside_brand">
-            <div class="kt-aside__brand-logo">
-                <a href="/member/list">
-                    <img alt="Logo" src="/web_resources/images/logo-light.png" />
-                </a>
-            </div>
-            <div class="kt-aside__brand-tools">
-                <button class="kt-aside__brand-aside-toggler" id="kt_aside_toggler">
-								<span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-										<g stroke="none" stroke-width="1" fill="#3f2676" fill-rule="evenodd">
-										
-										
-											<polygon id="Shape" points="0 0 24 0 24 24 0 24" />
-											<path d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z" id="Path-94" fill="#000000" fill-rule="nonzero" transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999) " />
-											<path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" id="Path-95" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999) " />
-										</g>
-									</svg></span>
-                    <span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<polygon id="Shape1" points="0 0 24 0 24 24 0 24" />
-											<path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" id="Path-96" fill="#000000" fill-rule="nonzero" />
-											<path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" id="Path-97" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-										</g>
-									</svg></span>
-                </button>
-
-
-            </div>
-        </div>    <!--로고 접기 기능 끝 -->
-
-        <div class="kt-header__topbar" style="float: right;">
-            <div style="margin:10px 0px 0px 10px;">  메세지: <span class="kt-badge kt-badge--brand">3</span>  </div>
-            <div style="margin:10px 10px 0px 10px;"> 이메일:   <span class="kt-badge kt-badge--warning"> 38</span>   </div>
-            <div style="margin:10px;"><span style="font-weight:bold;">배귀정 주무관님</span>환영합니다.</div>
-            <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold" style="margin-top:9px; width: 100px; height: 25px; font-size: 13px;"> 로그아웃
-					<span class="la la-sign-out"   style="color:#666; font-size: 1.5rem !important; margin-left: 4px;"></span>
-					</span>
+    <!--    사이드메뉴 접힘 버튼 시작  -->
+    <input id="side-toggle" type="checkbox">
+    <label for="side-toggle" class="btn_side-toggle">
+        <span class="fa fa-angle-double-left"></span>
+        <div class="toggle-menu">
+            <ul class="menu">
+                <li class="checked"><span class="fa fa-book"></span>
+                </li>
+                <li><span class="fa fa-th-large"></span>
+                </li>
+                <li><span class="fa fa-envelope-open-text"></span>
+                </li>
+                <li><span class="fa fa-file-import"></span>
+                </li>
+                <li><span class="fa fa-sitemap"></span>
+                </li>
+                <li><span class="fa fa-user-cog"></span>
+                </li>
+                <li><span class="fa fa-database"></span>
+                </li>
+                <li><span class="fa fa-headset"></span>
+                </li>
+                <li><span class="fa fa-edit"></span>
+                </li>
+                <li><span class="fa fa-chart-bar"></span>
+                </li>
+                <li><span class="fa fa-ellipsis-h"></span>
+                </li>
+                <li><span class="fa fa-envelope"></span>
+                </li>
+                <li><span class="fa fa-desktop"></span>
+                </li>
+                <li><span class="fa fa-tasks"></span>
+                </li>
+                <li><span class="fa fa-clipboard-list"></span>
+                </li>
+            </ul>
         </div>
-
-    </div>
-    <!-- hader 끝  -->
-
-
-
-    <!-- menu 시작 -->
-    <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside"  style="margin-top: 59px;">
-
-
-
-
-        <!-- begin:: Aside Menu -->
-        <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
-            <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
-                <ul class="kt-menu__nav">
-                    <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-icon">
-									<span class="fa fa-sitemap"></span>
-								</span><span class="kt-menu__link-text">기초정보</span>
-                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
-                    </a>
-                        <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-                            <ul class="kt-menu__subnav">
-                                <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true">
-                                    <span class="kt-menu__link"><span class="kt-menu__link-text">기초정보</span></span></li>
-
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">조직관리</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                    <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-                                        <ul class="kt-menu__subnav">
-                                            <li class="kt-menu__item " aria-haspopup="true"><a href="?pageChange=page06.jsp" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">사원관리</span></a></li>
-                                            <li class="kt-menu__item " aria-haspopup="true"><a href="components_base_tabs_line.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">고객사관리</span></a></li>
-                                            <li class="kt-menu__item " aria-haspopup="true"><a href="components_base_tabs_line.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">부서관리</span></a></li>
-                                            <li class="kt-menu__item " aria-haspopup="true"><a href="components_base_tabs_line.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">팀관리</span></a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </li>   <!-- 기초 정보 끝 -->
-
-
-                    <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-icon">
-											<span class="flaticon-whatsapp"> </span>
-											</span><span class="kt-menu__link-text">통화이력</span>
-                        <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                        <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-                            <ul class="kt-menu__subnav">
-                                <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true">
-                                    <span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
-
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">통화청취</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-
-                                </li>
-                            </ul>
-                        </div>
-
-                    </li>
-
-                    <!-- 통화청취 메뉴 끝 -->
-                    <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-icon">
-											<span class="fa fa-chart-bar"> </span>
-											</span><span class="kt-menu__link-text">통계</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                        <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-                            <ul class="kt-menu__subnav">
-                                <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true">
-                                    <span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
-
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">시간 및 상담원별 통계</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-
-                                </li>
-                            </ul>
-                        </div>
-
-                    </li>
-                    <!-- 모니터링 메뉴 시작 -->
-
-
-                    <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-icon">
-										<span class="fa fa-laptop"> </span>
-										</span><span class="kt-menu__link-text">모니터링</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                        <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-                            <ul class="kt-menu__subnav">
-                                <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true">
-                                    <span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
-
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">전광판</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-
-                                </li>
-                                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">상담 현황</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+    </label>
+    <!--    사이드메뉴 접힘 버튼 끝  -->
+    <!-- 사이드메뉴 시작 -->
+    <div class="side_menu">
+        <!--  로고 영역 시작  -->
+        <div class="side_logo"><a href="#">
+            <img alt="로고" src="/web_resources/images/simbol.png" style="height: 30px; margin-top: -2px;"></a>
+        </div>
+        <!--  로고 영역 끝  -->
+        <!--  드롭다운 메뉴 시작  -->
+        <ul class="menu">
+            <li><a href="https://dev.kms.codehive.co.kr/init?id=test&name=%ED%85%8C%EC%8A%A4%ED%8A%B8(%ED%85%8C)&auth_cd=SUPERVISOR" target="_blank"><span class="fa fa-book"></span>KMS</a>
+            </li>
+            <li><a href="#"><span class="fa fa-th-large"></span>채널</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=cti_call.jsp">Call</a></li>
+                    <li><a href="main.jsp?pageChange=cti_board.jsp">Board</a></li>
+                    <li><a href="main.jsp?pageChange=cti_chat.jsp">Chat</a></li>
+                    <li><a href="main.jsp?pageChange=cti_email.jsp">Mail</a></li>
                 </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-envelope-open-text"></span>메일수신함관리</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=email_inbox.jsp">메일수신/배분현황</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-file-import"></span>이관관리</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=transmitAllList.jsp">전체 이관 현황</a></li>
+                    <li><a href="main.jsp?pageChange=transmitList.jsp">My 이관</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-sitemap"></span>조직관리</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=companyAdd.jsp">고객사 관리</a></li>
+                    <li><a href="main.jsp?pageChange=partAdd.jsp">부서 관리</a></li>
+                    <li><a href="main.jsp?pageChange=teamAdd.jsp">팀 관리</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-user-cog"></span>사용자(권한)관리</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=employeeAdd.jsp">사용자 관리</a></li>
+                    <li><a href="main.jsp?pageChange=userAuth.jsp">권한 관리</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-database"></span>DB관리</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=distributeDB.jsp">DB 배분/회수</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-headset"></span>통화이력</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=record.jsp">통화청취</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-edit"></span>코드관리</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=cateAdd.jsp">상담유형 관리</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-chart-bar"></span>통계</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=stats.jsp">시간 및 상담원별 통계</a></li>
+                    <li><a href="main.jsp?pageChange=consultHistoryList.jsp">상담이력 현황</a></li>
+                    <li><a href="https://dev.ibl.co.kr/analytics/analyticsPage" target="_blank">상담 트렌드</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-ellipsis-h"></span>로그정보</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=log.jsp">비정상 로그인/아웃 로그</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-envelope"></span>문자(SMS)</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=sms.jsp">대량 문자발송</a></li>
+                    <li><a href="main.jsp?pageChange=smsSendLog.jsp">문자발송 이력 조회</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="fa fa-desktop"></span>모니터링</a>
+                <ul class="sub">
+                    <li onclick="window.open('../../../display.html','전광판','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes')"><a >전광판</a></li>
+                    <li><a href="main.jsp?pageChange=onState.jsp">상담 현황</a></li>
+                </ul>
+            </li>
+            <li onclick="window.open('surveyQList_pop.html','설문지 현황','width=1000,height=840,location=no,status=no,scrollbars=yes');"><a href="#"><span class="fa fa-tasks"></span>설문지(Survey) 연동</a>
+            </li>
+            <li><a href="#"><span class="fa fa-chart-area"></span>고객 프로파일링</a>
+                <ul class="sub">
+                    <li><a href="main.jsp?pageChange=profiling.jsp">고객 프로파일링</a></li>
+                </ul>
+            </li>
+            <li><a href="main.jsp?pageChange=notice.jsp"><span class="fa fa-clipboard-list"></span>공지사항</a>
+            </li>
+        </ul>
+        <!--  드롭다운 메뉴 끝  -->
+        <!--  로그아웃 버튼 시작  -->
+        <button type="button" class="btn_logout">
+            <span class="fa fa-sign-out-alt"></span>로그아웃
+        </button>
+        <!--  로그아웃 버튼 끝  -->
+    </div>
+    <!--  사이드메뉴 끝  -->
+    <!-- ------Side Menu 왼쪽 사이드메뉴 영역 끝------ -->
+
+    <!-- ------오른쪽 컨텐츠 영역 시작------ -->
+    <section class="contents-area">
+        <!--  ------상단 바 영역 시작------  -->
+
+
+        <!-- 상단바 접힙 버튼 시작 -->
+        <input id="top-toggle" type="checkbox">
+        <label for="top-toggle" class="btn_top-toggle">
+            <div class="btn_top-bar_menu">
+                <span class="fa fa-arrow-up"></span>
+            </div>
+            <div class="info-box">상태바 숨김</div>
+        </label>
+        <!-- 상단바 접힙 버튼 끝 -->
+        <!--  상단 바 영역 시작  -->
+        <div class="top-bar">
+            <div class="login-num dp_i-b">내선번호
+                <span class="fa fa-phone mgr2"></span>
+                <span class="num">5003</span>
+            </div>
+            <div class="login-ment mgl8 dp_i-b">
+                <span class="fontb mgr4">전경아님</span><span>환영합니다.</span>
+            </div>
+            <!-- 메인 검색영역 -->
+            <div class="main-search">
+                <input type="text" class="fl" placeholder="Search ..." style="width: calc(100% - 78px);">
+                <button class="btn_main-search">
+                    <span class="fa fa-search"></span>
+                </button>
+                <button class="btn_manual w70x mgl8">Manual</button>
+            </div>
+            <!-- 기타 링크 영역 -->
+            <div class="etc-link">
+                <a><span>회사소개</span></a>
+                <a href="page_email.html" target="_blank"><span>고객사홈페이지</span></a>
+                <a><span>브랜드샵</span></a>
             </div>
         </div>
-    </div>
-    <!--Menu 끝 -->
+        <!--  상단 바 영역 끝  -->
+        <!--  ------상단 바 영역 끝------  -->
+        <!--  ############### 컨텐츠 시작 ###############  -->
 
 
 
-    <!--  Content   시작 -->
-    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
 
+        <div class="contents">
 
-
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="kt-portlet">
-                    <!-- 사원정보 관리 타이틀 시작  title start -->
-                    <div class="kt-portlet__head">
-                        <div class="tixtop_s001">
-                            <span class="fa fa-check-circle co77"></span>
-                            사원정보 관리</div>
-                        <div style="width: 100px; float: right;">
-                            <span class="btn_addnew  he30 " data-toggle="modal" data-target="#kt_modal_6" >+ 등록</span>
-                        </div>
+            <!-- ------------------- Contents area Start -------------------- -->
+            <div class="con-area he100p">
+                <!--  컨텐츠박스 영역 -- 시작  -->
+                <div class="con-box-area w100">
+                    <div class="con-box_top">
+                        <span>조직정보 - [팀] 관리</span>
+                        <button class="con-box_top-btn w100x fr" onclick="teamAddPop()">
+                            <span class="fa fa-plus mgr4"></span>
+                            <span>등록</span>
+                        </button>
                     </div>
-                    <!-- 사원정보 타이틀 끝    title end -->
-
-                    <!-- 검색박스 시작  search start -->
-                    <div class="boxs">
-                        <div class="w10 fl">
-                            <span style="font-weight: 600;"> *총 <span class="point_co">14</span>건</span>
-                        </div>
-                        <div class="fr he20 w90">
-			<span class="btn_findnew fr">
-			 검색
-			</span>
-                            <input type="text" class="form-control_22 w12 fr"  placeholder="">
-
-                            <div class="fr w115 mgr4">
-                                <select class="form-control kt-selectpicker">
-                                    <option>전체</option>
-                                    <option>사원명</option>
-                                    <option>사원아이디</option>
-                                    <option>내선번호</option>
-                                    <option>부서</option>
-                                    <option>권한</option>
+                    <div class="con-box">
+                        <!-- 검색영역 시작 -->
+                        <div class="search-area w100">
+                      <span class="title_icon fl mgt2 mgr8">
+                        <span class="fa fa-user-friends"></span>
+                      </span>
+                            <span class="txt_result fl fontb">
+                          총 <span class="tix_point">5</span>팀
+                      </span>
+                            <div class="fr">
+                                <input class="w200x mgr8 fl" type="text" placeholder="날짜를 선택하세요" id="daterange" readonly>
+                                <select name="" class="w120x mgr8 fl">
+                                    <option selected value="">팀 상태</option>
+                                    <option value="">사용중</option>
+                                    <option value="">업무종료</option>
                                 </select>
-                            </div>
-                            <div class="fr w115 mgr4" >
-                                <select class="form-control kt-selectpicker">
-                                    <option>재직상태</option>
-                                    <option>재직</option>
-                                    <option>퇴직</option>
-                                    <option>휴직</option>
+                                <select name="" class="w120x mgr8 fl">
+                                    <option selected value="">팀 선택값</option>
+                                    <option value="">팀명</option>
+                                    <option value="">부서코드</option>
                                 </select>
+                                <input type="text" class="w200x mgr8 fl" placeholder="검색할 단어를 입력하세요">
+                                <button type="button" class="btn-st1 w60x he36x mgr8 fl">
+                                    <span>검색</span>
+                                    <span class="fa fa-search"></span>
+                                </button>
+                                <button class="btn-st6 w36x fl">
+                                    <span class="fa fa-undo-alt" style="font-size: 16px;"></span>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <!-- 검색박스 끝  search end -->
-                    <div class="kt-portlet__body">
-                        <div class="kt-section">
-                            <div class="kt-section__content">
-                                <!--  테이블 시작 -->
-                                <table class="table table-new1 table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>사원아이디</th>
-                                        <th>사원명</th>
-                                        <th>내선번호</th>
-                                        <th>팀명</th>
-                                        <th>권한</th>
-                                        <th>재직상태</th>
-                                        <th>입사일자</th>
-                                        <th>퇴사일자</th>
-                                        <th>비밀번호 오류</th>
-                                        <th>비밀번호 초기화</th>
-                                        <th>등록자</th>
-                                        <th>등록일시</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>14</td>
-                                        <td>gwijung.bae0</td>
-                                        <td>배귀정0</td>
-                                        <td>7000</td>
-                                        <td>건설1팀</td>
-                                        <td>ASSIST   </td>
-                                        <td>재직</td>
-                                        <td>2019-04-27</td>
-                                        <td>2019-03-07</td>
-                                        <td>0</td>
-                                        <td><img src="/web_resources/images/icon_r.png"  alt="" ></td>
-                                        <td>배귀정</td>
-                                        <td>2019-07-10 14:18:46</td>
-                                    </tr>
-                                    <tr>
-                                        <td>13</td>
-                                        <td>gwijung.bae9</td>
-                                        <td>배귀정9</td>
-                                        <td>7009</td>
-                                        <td>농수산1팀</td>
-                                        <td>AM   </td>
-                                        <td>재직</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>0</td>
-                                        <td><img src="/web_resources/images/icon_r.png" alt="" ></td>
-                                        <td>배귀정</td>
-                                        <td>2019-07-10 15:15:59</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12</td>
-                                        <td>gwijung.bae8</td>
-                                        <td>배귀정8</td>
-                                        <td>7008</td>
-                                        <td>농수산1팀</td>
-                                        <td>AGENT   </td>
-                                        <td>재직</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>0</td>
-                                        <td><img src="/web_resources/images/icon_r.png" alt=""  ></td>
-                                        <td>배귀정</td>
-                                        <td>2019-07-29 14:06:17</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- 테이블 끝 -->
-                                <!-- 페이징 시작-->
-                                <div id="pwary">
-                                    <div class="pwar">
-                                        <div id="pagingNew">
-                                            <a href="#" class="numPrev_a">
-                                                <span class="flaticon2-fast-back" style="font-size: 0.6rem;"></span>
-                                            </a>
-                                            <a href="#" class="numPrev">
-                                                <span class="flaticon2-back" style="font-size: 0.6rem;"></span>
-                                            </a>
-                                            <span class="sel">1</span>
-                                            <a href="#" class="numBox">2</a>
-                                            <a href="#" class="numBox">3</a>
-                                            <a href="#" class="numBox">4</a>
-                                            <a href="#" class="numBox">5</a>
-                                            <a href="#" class="numBox">6</a>
-                                            <a href="#" class="numBox">7</a>
-                                            <a href="#" class="numBox">8</a>
-                                            <a href="#" class="numBox">9</a>
-                                            <a href="#" class="numBox">10</a>
-                                            <a href="#" class="numNext">
-                                                <span class="flaticon2-next" style="font-size: 0.6rem;"></span></a>
-                                            <a href="#" class="numNext_2">
-                                                <span class="flaticon2-fast-next" style="font-size: 0.6rem;"></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 페이징 끝 -->
-                            </div>
+                        <!-- 검색영역 끝 -->
+                        <!-- 테이블 시작 -->
+                        <div class="list-area round">
+                            <table class="con-list last-noline w100">
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>고객사명</th>
+                                    <th>부서명</th>
+                                    <th>팀명</th>
+                                    <th>정렬</th>
+                                    <th>사용유무</th>
+                                    <th>등록자</th>
+                                    <th>등록일시</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>5</td>
+                                    <td>야나두</td>
+                                    <td>고객센터1</td>
+                                    <td onclick="teamModPop()">1팀</td>
+                                    <td>1</td>
+                                    <td>Y</td>
+                                    <td>kyunga.jun</td>
+                                    <td>2021-03-04 11:04</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>야나두</td>
+                                    <td>고객센터1</td>
+                                    <td onclick="teamModPop()">2팀</td>
+                                    <td>1</td>
+                                    <td>Y</td>
+                                    <td>kyunga.jun</td>
+                                    <td>2021-03-04 11:04</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>야나두</td>
+                                    <td>고객센터1</td>
+                                    <td onclick="teamModPop()">3팀</td>
+                                    <td>1</td>
+                                    <td>Y</td>
+                                    <td>kyunga.jun</td>
+                                    <td>2021-03-04 11:04</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>야나두</td>
+                                    <td>고객센터2</td>
+                                    <td onclick="teamModPop()">1팀</td>
+                                    <td>2</td>
+                                    <td>Y</td>
+                                    <td>kyunga.jun</td>
+                                    <td>2021-03-04 11:04</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>야나두</td>
+                                    <td>고객센터2</td>
+                                    <td onclick="teamModPop()">2팀</td>
+                                    <td>2</td>
+                                    <td>N</td>
+                                    <td>kyunga.jun</td>
+                                    <td>2021-03-04 11:04</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
+                        <!-- 테이블 끝 -->
+                        <!--  페이징 시작   -->
+                        <div class="paging">
+                            <ul>
+                                <li class="page_first">
+                                    <span class="fa fa-angle-double-left"></span></li>
+                                <li class="page_prev">
+                                    <span class="fa fa-angle-left"></span></li>
+                                <li class="num_this">
+                                    <span>1</span></li>
+                                <li class="num">
+                                    <span>2</span></li>
+                                <li class="num">
+                                    <span>3</span></li>
+                                <li class="num">
+                                    <span>4</span></li>
+                                <li class="num">
+                                    <span>5</span></li>
+                                <li class="page_next">
+                                    <span class="fa fa-angle-right"></span></li>
+                                <li class="page_last">
+                                    <span class="fa fa-angle-double-right"></span></li>
+                            </ul>
+                        </div>
+                        <!--   페이징 끝  -->
                     </div>
                 </div>
+                <!--  컨텐츠박스 영역 -- 끝  -->
             </div>
-            <!-- 사원정보 모달 팝업 시작 -->
-
-            <script type="text/javascript">
-
-                $(document).ready(function() {
-                    $('#reg_form').bootstrapValidator({
-
-                        fields: {
-                            first_name: {
-                                validators: {
-                                    stringLength: {
-                                        min: 2,
-                                    },
-                                    notEmpty: {
-                                        message: '아이디를 입력해주세요'
-                                    }
-                                }
-                            },
-
-                            phone: {
-                                validators: {
-                                    notEmpty: {
-                                        message: '내선번호를 입력하세요'
-                                    },
-                                    phone: {
-
-                                        message: '다시입력해주세요'
-                                    }
-                                }
-                            },
-
-
-                        }
-                    })
-
-
-                        .on('success.form.bv', function(e) {
-                            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                            $('#reg_form').data('bootstrapValidator').resetForm();
-
-                            // Prevent form submission
-                            e.preventDefault();
-
-                            // Get the form instance
-                            var $form = $(e.target);
-
-                            // Get the BootstrapValidator instance
-                            var bv = $form.data('bootstrapValidator');
-
-                            // Use Ajax to submit form data
-                            $.post($form.attr('action'), $form.serialize(), function(result) {
-                                console.log(result);
-                            }, 'json');
-                        });
-                });
-
-
-            </script>
-            <div class="col-xl-12">
-                <div class="kt-portlet">
-                    <div class="modal fade" id="kt_modal_6" tabindex="-1" role="dialog"  aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle"><span class="fa fa-pencil-alt mgr8 co77"></span>사원정보 등록</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div style="width: 100%;">
-                                        <form class="form-horizontal martop8" method="post"  id="reg_form">
-                                            <fieldset>
-                                                <!-- 사원아이디 중복검색 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">사원아이디<span class="po">* </span> </label>
-                                                    <div class="col-md-6  inputGroupContainer"   style="width: 100%;">
-                                                        <div class="input-group">
-                                                            <input  name="first_name" type="text" class="form-control_1" placeholder="아이디를 입력해주세요">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-primary_777" type="button">중복검색</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 사원아이디 중복검색 끝 -->
-                                                <!-- 사원명 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7 ">사원명<span class="po">* </span> </label>
-                                                    <div class="col-md-6  inputGroupContainer">
-                                                        <div class="input-group">
-                                                            <input  type="text" class="form-control_22" placeholder=" ">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 사원명  끝 -->
-                                                <!-- 부서코드 셀렉트 박스 시작  -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">부서코드</label>
-                                                    <div class="col-md-6  inputGroupContainer">
-                                                        <div class="input-group_1">
-                                                            <div class="fl w115 mgr4" >
-                                                                <select class="form-control kt-selectpicker">
-                                                                    <option>본부명선택</option>
-                                                                    <option>LG</option>
-                                                                    <option>루키스</option>
-                                                                    <option>삼성</option>
-                                                                    <option>유비콤</option>
-                                                                    <option>한국고용정보</option>
-                                                                    <option>현대자동차</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="fl w115" >
-                                                                <select class="form-control kt-selectpicker">
-                                                                    <option>팀명선택</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 부서코드 셀렉트 박스 끝 -->
-                                                <!-- 내선번호 중복검색 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7 ">내선번호<span class="po">* </span> </label>
-                                                    <div class="col-md-6  inputGroupContainer"   style="width: 100%;">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control_1"  name="phone" placeholder="숫자 4자리만 입력해주세요">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-primary_777" type="button">중복검색</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 내선번호 중복검색 끝 -->
-                                                <!-- 재직여부 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">재직여부<span class="po">* </span></label>
-                                                    <div class="col-md-6 inputGroupContainer">
-                                                        <div class="input-group">
-                                                            <select class="form-control kt-selectpicker">
-                                                                <option>선택</option>
-                                                                <option>재직</option>
-                                                                <option>퇴사</option>
-                                                                <option>휴직</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 재직여부 끝 -->
-                                                <!-- 업무 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">업무<span class="po">* </span></label>
-                                                    <div class="col-md-6 inputGroupContainer">
-                                                        <div class="input-group">
-                                                            <select class="form-control kt-selectpicker">
-                                                                <option>선택</option>
-                                                                <option>상담</option>
-                                                                <option>관리</option>
-                                                                <option>기사</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 업무 끝 -->
-                                                <!-- 권한 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">권한<span class="po">* </span></label>
-                                                    <div class="col-md-6 inputGroupContainer">
-                                                        <div class="input-group">
-                                                            <select class="form-control kt-selectpicker">
-                                                                <option>선택</option>
-                                                                <option>AM</option>
-                                                                <option>MANAGER</option>
-                                                                <option>INSTRUCTOR</option>
-                                                                <option>ASSIST</option>
-                                                                <option>SUPERVISOR</option>
-                                                                <option>AGENT</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 권한 끝 -->
-                                                <!-- 입사일자 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">입사일자<span class="po">* </span></label>
-                                                    <div class="col-md-6 inputGroupContainer">
-                                                        <div class='input-group ' id='kt_daterangepicker_2'  style="height: 30px;">
-                                                            <input type='text' class="form-control he30new" readonly placeholder=""  style="height: 30px !important;">
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 입사일자 끝 -->
-                                                <!-- 퇴사일자 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">퇴사일자<span class="po">* </span></label>
-                                                    <div class="col-md-6 inputGroupContainer">
-                                                        <div class='input-group ' id='kt_daterangepicker_1'  style="height: 30px;">
-                                                            <input type='text' class="form-control he30new" readonly placeholder=""  style="height: 30px !important;">
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 퇴사일자 끝 -->
-                                                <!-- 비고 시작 -->
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label margin-top7">비고 </label>
-                                                    <div class="col-md-6  inputGroupContainer">
-                                                        <div class="input-group">
-                                                            <textarea class="form-control " id="exampleTextarea" rows="12"  style="height: 45px ! important "></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <span class=" fs11"  style="float: left; width:72%;">*항목은 <span class="po">필수항목</span>입니다. </span><br><br>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"   style="height: 30px;">닫기</button>
-                                    <button type="button" class="btn btn-primary"  style="height: 30px;">저장</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 사원정보 등록 모달 팝업 끝 -->
+            <!--  ------------------- Contents area End  ------------------- -->
         </div>
-    </div>
-    <!--  Content  끝 -->
-
-
-</div>
-<!-- page 끝 -->
-
-<script>
-    var KTAppOptions = {
-        "colors": {
-            "state": {
-                "brand": "#5d78ff",
-                "dark": "#282a3c",
-                "light": "#ffffff",
-                "primary": "#5867dd",
-                "success": "#34bfa3",
-                "info": "#36a3f7",
-                "warning": "#ffb822",
-                "danger": "#fd3995"
-            },
-            "base": {
-                "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
-                "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+        <!--  모달팝업용 black dim  -->
+        <div class="dim"></div>
+        <!--  ====== 모달팝업 1 Start ====== -->
+        <section class="modal" style="width: 440px;">
+            <!--  컨텐츠 박스 시작 -->
+            <div class="con-box-area">
+                <!--  상단 제목 시작  -->
+                <div class="con-box_top">
+                    <span>[팀] 등록</span>
+                    <button class="con-box_top-btn w90x fr" onclick="teamAddPopClose()">
+                        <span class="fa fa-times mgr4"></span>
+                        <span>닫기</span>
+                    </button>
+                </div>
+                <!--  상단 제목 끝  -->
+                <!--  내용 시작   -->
+                <div class="con-box">
+                    <table class="table-ver2 w100">
+                        <tr>
+                            <th>고객사명</th>
+                            <th>부서명</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select class="w100" name="">
+                                    <option value="" selected>선택</option>
+                                    <option value="">야나두</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="w100" name="">
+                                    <option value="" selected>선택</option>
+                                    <option value="">고객센터1</option>
+                                    <option value="">고객센터2</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>팀명<span class="tix_point">*</span></th>
+                            <th>팀상태<span class="tix_point">*</span></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="w100" placeholder="팀명을 입력해주세요">
+                            </td>
+                            <td>
+                                <select class="w100" name="">
+                                    <option value="" selected>사용중</option>
+                                    <option value="">업무중지</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">정렬순서<span class="tix_point">*</span></th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" class="w100" placeholder="(숫자)만 입력해주세요">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">비고</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <textarea class="w100" style="height: 72px"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--  내용 끝   -->
+                <!--  하단 영역 시작  -->
+                <div class="con-box_bottom">
+                 <span class="fl">
+                     <span class="tix_point">*</span>
+                     <span>항목은 필수항목입니다.</span>
+                 </span>
+                    <button class="btn-st1 w60x fr mgl8">등록</button>
+                    <button class="btn-st5 w60x fr" onclick="teamAddPopClose()">닫기</button>
+                </div>
+                <!--  하단 영역 끝  -->
+            </div>
+            <!--  컨텐츠 박스 끝  -->
+        </section>
+        <!--  ====== 모달팝업 1 End ====== -->
+        <!--  ====== 모달팝업 2 Start ====== -->
+        <section class="modal2" style="width: 440px;">
+            <!--  컨텐츠 박스 시작 -->
+            <div class="con-box-area">
+                <!--  상단 제목 시작  -->
+                <div class="con-box_top">
+                    <span>[팀] 수정</span>
+                    <button class="con-box_top-btn w90x fr" onclick="teamModPopClose()">
+                        <span class="fa fa-times mgr4"></span>
+                        <span>닫기</span>
+                    </button>
+                </div>
+                <!--  상단 제목 끝  -->
+                <!--  내용 시작   -->
+                <div class="con-box">
+                    <table class="table-ver2 infor w100">
+                        <tr>
+                            <th>고객사명</th>
+                            <th>부서명</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select class="w100" name="">
+                                    <option value="" selected>선택</option>
+                                    <option value="">야나두</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="w100" name="">
+                                    <option value="" selected>선택</option>
+                                    <option value="">고객센터1</option>
+                                    <option value="">고객센터2</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>팀명<span class="tix_point">*</span></th>
+                            <th>팀상태<span class="tix_point">*</span></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="w100" placeholder="팀명을 입력해주세요">
+                            </td>
+                            <td>
+                                <select class="w100" name="">
+                                    <option value="" selected>사용중</option>
+                                    <option value="">업무중지</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">정렬순서<span class="tix_point">*</span></th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" class="w100" placeholder="(숫자)만 입력해주세요">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">비고</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <textarea class="w100" style="height: 72px"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--  내용 끝   -->
+                <!--  하단 영역 시작  -->
+                <div class="con-box_bottom">
+                 <span class="fl">
+                     <span class="tix_point">*</span>
+                     <span>항목은 필수항목입니다.</span>
+                 </span>
+                    <button class="btn-st1 w60x fr mgl8">수정</button>
+                    <button class="btn-st5 w60x fr" onclick="teamModPopClose()">닫기</button>
+                </div>
+                <!--  하단 영역 끝  -->
+            </div>
+            <!--  컨텐츠 박스 끝  -->
+        </section>
+        <!--  ====== 모달팝업 2 End ====== -->
+        <script type="text/javascript">
+            /** 모달 팝업*/
+            const modal = document.querySelector('.modal');   // 모달
+            const modal2 = document.querySelector('.modal2');   // 모달2
+            const dim = document.querySelector('.dim');   // black 배경
+            function teamAddPop() {
+                modal.style.display = 'block';
+                dim.style.display = 'block';
             }
-        }
-    };
+            function teamAddPopClose() {
+                modal.style.display = 'none';
+                dim.style.display = 'none';
+            }
+            function teamModPop() {
+                modal2.style.display = 'block';
+                dim.style.display = 'block';
+            }
+            function teamModPopClose() {
+                modal2.style.display = 'none';
+                dim.style.display = 'none';
+            }
+        </script>
+        <!--  ############### 컨텐츠 끝 ###############  -->
+        <script>
+            $(document).ready(function() {
+                initRangeCalender("daterange", "deadline");
+            });
+        </script>
+
+    </section>
+    <!-- ------오른쪽 컨텐츠 영역 끝------ -->
+</div>
+<!-- 탭메뉴 설정 js -->
+<script>
+    const tabList = document.querySelectorAll('.tab_area .list li');
+    const contents = document.querySelectorAll('.tab_area .cont_area .cont')
+    let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
+
+    for(var i = 0; i < tabList.length; i++){
+        tabList[i].querySelector('.btn').addEventListener('click', function(e){
+            e.preventDefault();
+            for(var j = 0; j < tabList.length; j++){
+                // 나머지 버튼 클래스 제거
+                tabList[j].classList.remove('is_on');
+                // 나머지 컨텐츠 display:none 처리
+                contents[j].style.display = 'none';
+            }
+            // 버튼 관련 이벤트
+            this.parentNode.classList.add('is_on');
+            // 버튼 클릭시 컨텐츠 전환
+            activeCont = this.getAttribute('href');
+            document.querySelector(activeCont).style.display = 'block';
+        });
+    }
 </script>
 
-<!-- end::Global Config -->
-
-<!--begin:: Global Mandatory Vendors -->
-<script src="/web_resources/bower_components/popper.js/dist/umd/popper.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/js-cookie/src/js.cookie.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/moment/min/moment.min.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/jquery-ui/ui/minified/tooltip.min.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/wnumb/wNumb.js" type="text/javascript"></script>
-
-<!--begin:: Global Optional Vendors -->
-<script src="/web_resources/assets/vendors/general/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/block-ui/jquery.blockUI.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/bootstrap-datepicker/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/bootstrap-timepicker/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-maxlength/src/bootstrap-maxlength.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/vendors/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-switch/dist/js/bootstrap-switch.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/bootstrap-switch/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/select2/dist/js/select2.full.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/ion-rangeslider/js/ion.rangeSlider.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/typeahead.js/dist/typeahead.bundle.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/handlebars/dist/handlebars.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/inputmask/dist/jquery.inputmask.bundle.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/inputmask/dist/inputmask/inputmask.date.extensions.js" type="text/javascript"></script>
-<script src="/web_resources/bower_components/inputmask/dist/inputmask/inputmask.numeric.extensions.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/nouislider/distribute/nouislider.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/owl.carousel/dist/owl.carousel.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/autosize/dist/autosize.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/clipboard/dist/clipboard.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/dropzone/dist/dropzone.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/summernote/dist/summernote.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/markdown/lib/markdown.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/bootstrap-markdown/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/bootstrap-notify/bootstrap-notify.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/bootstrap-notify/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/jquery-validation/dist/additional-methods.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/jquery-validation/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/toastr/build/toastr.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/raphael/raphael.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/morris.js/morris.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/vendors/jquery-idletimer/idle-timer.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/waypoints/lib/jquery.waypoints.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/counterup/jquery.counterup.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/es6-promise-polyfill/promise.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/custom/components/vendors/sweetalert2/init.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/jquery.repeater/src/lib.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/jquery.repeater/src/jquery.input.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/jquery.repeater/src/repeater.js" type="text/javascript"></script>
-<script src="/web_resources/assets/vendors/general/dompurify/dist/purify.js" type="text/javascript"></script>
-
-<script src="/web_resources/assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
-<script src="/web_resources/assets/app/custom/login/login-general.js" type="text/javascript"></script>
-<script src="/web_resources/assets/app/custom/general/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
-<script src="/web_resources/assets/app/custom/general/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
-<script src="/web_resources/assets/app/custom/general/crud/metronic-datatable/base/data-local.js" type="text/javascript"></script>
-<script src="/web_resources/assets/app/custom/general/crud/forms/widgets/bootstrap-daterangepicker.js" type="text/javascript"></script>
-
-<script src="/web_resources/assets/app/bundle/app.bundle.js" type="text/javascript"></script>
+<!-- 캘린더 rangeCalender.js-->
+<script src="/web_resources/js/rangeCalender.js" type="text/javascript"></script>
+<!-- 사이드메뉴 leftMenu.js-->
+<script src="/web_resources/js/leftMenu.js" type="text/javascript"></script>
 </body>
-
-<!-- end::Body -->
 </html>
