@@ -437,40 +437,74 @@
                 <p>회원가입</p>
 
                 <!-- 로그인 정보 입력 --Start -->
+
+                <%--간단하게 넣기--%>
+                <%--<section id="container">
+                    <form action="/member/insert.do" method="post">
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="member_id">아이디</label>
+                            <input class="form-control" type="text" id="member_id" name="member_id" />
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="member_pw">패스워드</label>
+                            <input class="form-control" type="password" id="member_pw" name="member_pw" />
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="member_name">성명</label>
+                            <input class="form-control" type="text" id="member_name" name="member_name" />
+                        </div>
+                        <div class="form-group has-feedback">
+                        <label class="control-label" for="member_email">이메일</label>
+                        <input class="form-control" type="text" id="member_email" name="member_email" />
+                        </div>
+                        <div class="form-group has-feedback">
+                            <button class="btn btn-success" type="submit" id="submit">회원가입</button>
+                            <button class="cancel btn btn-danger" type="button">취소</button>
+                        </div>
+                    </form>
+                </section>--%>
+
+                <div>
+                    <form id="registeringForm" name="registeringForm" >
+                        <ul>
+                            <li>
+                                <span class="fa fa-user-alt"></span>
+                                <input type="text" name="member_id" id="member_id" placeholder="아이디를 입력하세요"required>
+                                <div class="login-title">
+                                    <span>ID</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="fa fa-lock"></span>
+                                <input type="password" name="member_pw" id="member_pw" placeholder="비밀번호를 입력하세요"required>
+                                <div class="login-title">
+                                    <span>Password</span>
+                                </div>
+                            </li>
+                            <%--
+                            <li class="mgt8">
+                                <span class="fa fa-lock"></span>
+                                <input type="password" placeholder="비밀번호를 다시 입력하세요"required>
+                            </li>
+                             --%>
+                            <li>
+                                <span class="fa fa-user-alt"></span>
+                                <input type="text" name="member_name" id="member_name" placeholder="이름을 입력하세요"required>
+                                <div class="login-title">
+                                    <span>이름</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="fa fa-user-alt"></span>
+                                <input type="text" name="member_email" id="member_email" placeholder="이메일 주소를 입력하세요"required>
+                                <div class="login-title">
+                                    <span>이메일</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
                 <ul>
-                    <li>
-                        <span class="fa fa-user-alt"></span>
-                        <input type="text" placeholder="아이디를 입력하세요">
-                        <div class="login-title">
-                            <span>ID</span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fa fa-lock"></span>
-                        <input type="password" placeholder="비밀번호를 입력하세요">
-                        <div class="login-title">
-                            <span>Password</span>
-                        </div>
-                    </li>
-                    <%--                    <li class="mgt8">
-                                            <span class="fa fa-lock"></span>
-                                            <input type="password" placeholder="비밀번호를 다시 입력하세요">
-                                        </li>
-                                        --%>
-                    <li>
-                        <span class="fa fa-user-alt"></span>
-                        <input type="text" placeholder="이름을 입력하세요">
-                        <div class="login-title">
-                            <span>이름</span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fa fa-user-alt"></span>
-                        <input type="text" placeholder="이메일 주소를 입력하세요">
-                        <div class="login-title">
-                            <span>이메일</span>
-                        </div>
-                    </li>
 
                     <li>
                         <!-- 오류 메시지 -- Start -->
@@ -478,9 +512,12 @@
                             <span class="tix_point"><b>아이디</b>를 입력해 주세요.</span>
                         </div>
                         <!-- 오류 메시지 -- End -->
-                        <button type="button" onclick="errorMsgView()">가입하기
+                        <button type="button" onclick="javascript:registering();">가입하기
+                        </button>
+                        <button type="button" onclick="location.href='<%= request.getContextPath() %>/'">취소
                         </button>
                     </li>
+
                     <li>
                         <!-- 비밀번호 변경조건  -->
                         <div class="pw-rule">
@@ -547,6 +584,121 @@
             errormsg.style.display = 'none';
         }
     </script>
+
+
+    <%-- 회원 가입 --%>
+
+    <%--간단하게 넣기--%>
+<%--    <script type="text/javascript">
+        $(document).ready(function(){
+            // 취소
+            $(".cancel").on("click", function(){
+                location.href = "/login";
+            })
+            $("#submit").on("click", function(){
+                if($("#member_id").val()==""){
+                    alert("아이디를 입력해주세요.");
+                    $("#member_id").focus();
+                    return false;
+                }
+                if($("#member_pw").val()==""){
+                    alert("비밀번호를 입력해주세요.");
+                    $("#member_pw").focus();
+                    return false;
+                }
+                if($("#member_name").val()==""){
+                    alert("이름을 입력해주세요.");
+                    $("#member_name").focus();
+                    return false;
+                }
+                if($("#member_email").val()==""){
+                    alert("이메일을 입력해주세요.");
+                    $("#member_email").focus();
+                    return false;
+                }
+            });
+        })
+    </script>--%>
+
+<%--회원가입 ajax--%>
+    <script type="text/javascript">
+        function registering() {
+
+            let member_id = $("#member_id").val();
+            let pattern = /^\s/;
+            let member_name = $("#member_name").val();
+            let member_email = $("#member_email").val();
+
+            if(member_id == '') {
+                alert("아이디를 입력해 주세요.");
+                $("#member_id").focus();
+                return false;
+            } else if(member_id.match(pattern)) {
+                alert("아이디는 공백으로 시작할 수 없습니다.");
+                $("#member_id").focus();
+                return false;
+            }
+
+            if(member_name == '') {
+                alert("이름을 입력해 주세요.");
+                $("#member_name").focus();
+                return false;
+            } else if(member_name.match(pattern)) {
+                alert("이름은 공백으로 시작할 수 없습니다.");
+                $("#member_name").focus();
+                return false;
+            }
+
+            if(member_email == '') {
+                alert("이메일을 입력해 주세요.");
+                $("#member_email").focus();
+                return false;
+            } else if(member_email.match(pattern)) {
+                alert("이메일은 공백으로 시작할 수 없습니다.");
+                $("#member_email").focus();
+                return false;
+            }
+
+            console.log("_-----------------___---___--log");
+            console.dir("_-----------------___---___--dir");
+            console.log("----------------------");
+
+            let form = $("#registeringForm").serialize();
+            console.log(form);
+
+            $.ajax({
+                url: "/member/insert.do",
+                type: "POST",
+                data: form,
+                dataType: "json",
+                success: function (data) {
+                    console.log("=======data1로그");
+                    console.log(data);
+                    console.log("=======data로그");
+                    if (data == '1') {
+
+                        console.log("=======write로그");
+
+                        alert("회원가입이 완료되었습니다.");
+                        window.location = '/';
+
+                    } else {
+                        alert("회원가입이 실패하였습니다.");
+                    }
+                },
+                error: function (request, status, error) {
+                    console.clear();
+                    console.log(request.responseText);
+                    alert("code:" + request.status + "\n\n" + "error:" + error);
+                }
+            });
+        }
+    </script>
+
+
+
+
+
     <!--  ############### 컨텐츠 끝 #################  -->
 
 </div>

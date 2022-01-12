@@ -22,18 +22,15 @@ public class MemberDAO {
     SqlSession sqlSession;
 
 
-    // 01. 회원가입
-    public int regMember(MemberDTO mDTO) throws Exception {
-        return template.insert(NAME_SPACE + ".memberReg", mDTO);
-    }
-
-    // 02. 로그인
+    // 01. 로그인
     public int loginMember(MemberDTO mDTO) throws Exception {
         return template.selectOne(NAME_SPACE + ".memberLogin", mDTO);
     }
 
-
-
+    // 02. 회원가입
+    public int regMember(MemberDTO mDTO) throws Exception {
+        return template.insert(NAME_SPACE + ".memberReg", mDTO);
+    }
 
 
 }

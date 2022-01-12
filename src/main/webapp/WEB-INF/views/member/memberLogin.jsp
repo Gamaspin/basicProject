@@ -489,8 +489,7 @@
                         <!-- 오류 메시지 -- End -->
                         <%--<button type="button" onclick="errorMsgView()">로그인
                         </button>--%>
-                        <button type="button" onClick="location.href='/member/list'">로그인</button
-
+                        <button type="button" onClick="location.href='/member/list'">로그인</button>
                     </li>
                     <li>
                         <label><input type="checkbox">
@@ -501,6 +500,9 @@
                         </a>
                     </li>
                 </ul>
+                <br>
+                <hr>
+                <button type="button" onClick="location.href='/member/register'">회원가입</button>
 
             </div>
         </div>

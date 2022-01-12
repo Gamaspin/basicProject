@@ -25,6 +25,7 @@
 
     <a href="<%= request.getContextPath() %>/"><button>홈으로 돌아가기</button></a>
     <br>
+    <button border='5' type="button" class="navBtn" onClick="location.href='/board/write'">게시물 작성하기</button>
 
     CONTENT LIST
 

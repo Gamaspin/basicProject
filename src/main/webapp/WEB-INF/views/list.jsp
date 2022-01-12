@@ -231,7 +231,7 @@
         <!--  컨텐츠박스 영역 -- 시작  -->
         <div class="con-box-area w100">
           <div class="con-box_top">
-            <span>조직정보 - [팀] 관리</span>
+            <span>회원관리</span>
             <button class="con-box_top-btn w100x fr" onclick="teamAddPop()">
               <span class="fa fa-plus mgr4"></span>
               <span>등록</span>

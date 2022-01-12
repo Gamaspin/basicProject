@@ -63,9 +63,10 @@
 
     <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/> <!-- name:sqlsession bean에서 사용할 이름, ref:위의 연결설정에서 정해진 dataSource를 참조 -->
-        <!--
-                <property name="mapperLocations" value="classpath:mapper/*.xml"/> &lt;!&ndash; 앞으로 참조할 sql문이 위치할 장소 &ndash;&gt;
-        -->
+
+        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:/mappers/*.xml"/>
+
         <property name="configurationProperties"><!-- mapper에서 양방향 암호화 사용 시 사용될 복호화 키 -->
             <props>
                 <prop key="cryptKey">'Gksrnr_rhdyd_!@3'</prop> <!-- 한국_고용_123 : 93 TRILLION YEARS-->
