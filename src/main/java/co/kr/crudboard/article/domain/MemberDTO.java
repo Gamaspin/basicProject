@@ -11,9 +11,6 @@ public class MemberDTO {
     private String member_email;
     private Date member_regdate;
 
-    public MemberDTO() {
-
-    }
 
     public int getMember_no() {
         return member_no;

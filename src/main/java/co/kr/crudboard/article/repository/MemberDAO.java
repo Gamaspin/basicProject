@@ -24,6 +24,7 @@ public class MemberDAO {
 
     // 01. 로그인
     public int loginMember(MemberDTO mDTO) throws Exception {
+        System.out.println("멤버DAO 로그인 실행하기");
         return template.selectOne(NAME_SPACE + ".memberLogin", mDTO);
     }
 

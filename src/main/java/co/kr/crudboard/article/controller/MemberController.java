@@ -20,27 +20,64 @@ public class MemberController {
     MemberService memberService;
 
 
-    // 멤버 로그인
+    // 01-1. 멤버 로그인 화면
     @RequestMapping(value = "/login")
     public String goToLogin() throws Exception {
         System.out.println("------------------------");
         System.out.println("멤버로그인화면 이동합니다.");
 
-
-
-
         return "member/memberLogin";
     }
 
+    // 01-2. 로그인 실행 컨트롤러
+    @ResponseBody
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String ajaxlogin_Member(HttpServletRequest request, Model model) throws Exception {
+
+        System.out.println("로그인실행 컨트롤러 시작");
+        System.out.println(request.getParameter("member_no"));
+        System.out.println(request.getParameter("member_id"));
+
+/*        HttpSession session = request.getSession();*/
+        int check = 0;
+        MemberDTO mDTO = new MemberDTO();
+        System.out.println(mDTO.toString());
+        mDTO.setMember_id(request.getParameter("member_id"));
+        mDTO.setMember_pw(request.getParameter("member_pw"));
+        try {
+
+            check =memberService.loginMember(mDTO);
+          /*  MemberDTO check = memberService.loginMember(mDTO);*/
+
+            mDTO.toString();
+            System.out.println("멤버컨트롤러 check 값 확인");
+            System.out.println(check);
+
+            model.addAttribute("login", mDTO);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "member/memberList";
+    }
+
+/*
+
+    @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+    public String logout(HttpSession session) throws Exception{
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
+*/
 
     // 02-1. 회원가입 화면 가기
     @RequestMapping(value = "/register")
     public String goToRegister() throws Exception {
         System.out.println("------------------------");
         System.out.println("멤버가입화면 이동합니다.");
-
-
-
 
         return "member/memberRegister";
     }

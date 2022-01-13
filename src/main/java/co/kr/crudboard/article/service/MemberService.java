@@ -27,8 +27,10 @@ public class MemberService {
         int mno = 0;
         try {
             mno = mDAO.loginMember(mDTO);
+            System.out.println("멤버서비스 mno 불러오기");
             System.out.println(mno);
         } catch (Exception e) {
+            System.out.println("");
         }
         return mno;
     }

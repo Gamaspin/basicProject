@@ -15,20 +15,16 @@
     <!--회원가입-->
     <insert id="memberReg">
         INSERT INTO tb_member_info (
-
             member_id,
             member_pw,
             member_name,
-            member_email,
-            member_regdate
+            member_email
         )
         VALUES (
-
                    #{member_id},
                    #{member_pw},
                    #{member_name},
-                   #{member_email},
-                   #{member_regdate}
+                   #{member_email}
                )
     </insert>
 
@@ -37,14 +33,11 @@
         </select>-->
 
     <!--로그인-->
-    <select id="memberLogin" resultType="MemberDTO">
+    <select id="memberLogin">
         SELECT
-            member_no,
             member_id,
-            member_pw,
-            member_name,
-            member_email,
-            member_regdate
+            member_pw
+
         FROM tb_member_info
         WHERE member_id = #{member_id}
           AND member_pw = #{member_pw}

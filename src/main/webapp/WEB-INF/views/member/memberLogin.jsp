@@ -466,43 +466,53 @@
                 <p>상담 관리 시스템</p>
                 <p>LOGIN</p>
                 <!-- 로그인 정보 입력 --Start -->
-                <ul>
-                    <li>
-                        <span class="fa fa-user-alt"></span>
-                        <input type="text" placeholder="아이디를 입력하세요">
-                        <div class="login-title">
-                            <span>ID</span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fa fa-lock"></span>
-                        <input type="password" placeholder="비밀번호를 입력하세요">
-                        <div class="login-title">
-                            <span>Password</span>
-                        </div>
-                    </li>
-                    <li>
-                        <!-- 오류 메시지 -- Start -->
-                        <div class="error-msg" style="display: none; cursor: pointer;" onclick="errorMsgHide()">
-                            <span class="tix_point"><b>아이디</b>와 <b>비밀번호</b>가 올바르지 않습니다.</span>
-                        </div>
-                        <!-- 오류 메시지 -- End -->
-                        <%--<button type="button" onclick="errorMsgView()">로그인
-                        </button>--%>
-                        <button type="button" onClick="location.href='/member/list'">로그인</button>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">
-                            <span>ID 기억하기</span>
-                        </label>
-                        <a href="pw.html" class="fr">
-                            <span>비밀번호를 잊으셨나요?</span>
-                        </a>
-                    </li>
-                </ul>
+
+                <div>
+                    <form id="loginForm" name="loginForm" >
+                        <ul>
+                            <li>
+                                <span class="fa fa-user-alt"></span>
+                                <input type="text" name="member_id"  placeholder="아이디를 입력하세요"required>
+                                <div class="login-title">
+                                    <span>ID</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="fa fa-lock"></span>
+                                <input type="password" name="member_pw" placeholder="비밀번호를 입력하세요"required>
+                                <div class="login-title">
+                                    <span>Password</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+
+                    <ul>
+                        <li>
+                            <!-- 오류 메시지 -- Start -->
+                            <div class="error-msg" style="display: none; cursor: pointer;" onclick="errorMsgHide()">
+                                <span class="tix_point"><b>아이디</b>와 <b>비밀번호</b>가 올바르지 않습니다.</span>
+                            </div>
+                            <!-- 오류 메시지 -- End -->
+                            <%--<button type="button" onclick="errorMsgView()">로그인
+                            </button>--%>
+                            <%--<button type="button" onClick="location.href='/member/list'">로그인</button>--%>
+                            <button type="button" onClick="doLogin()">로그인</button>
+                        </li>
+                        <li>
+                            <label><input type="checkbox">
+                                <span>ID 기억하기</span>
+                            </label>
+                            <a href="pw.html" class="fr">
+                                <span>비밀번호를 잊으셨나요?</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <br>
                 <hr>
                 <button type="button" onClick="location.href='/member/register'">회원가입</button>
+
 
             </div>
         </div>
@@ -556,6 +566,44 @@
         function errorMsgHide() {
             errormsg.style.display = 'none';
         }
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+        });
+
+        // 로그인
+        function doLogin() {
+
+            let form = $("#loginForm").serialize();
+            console.log("========----form----========")
+            console.log(form);
+
+            $.ajax({
+                url : "/member/login.do",
+                type : "POST",
+                data : form,
+                dataType : "json",
+                success : function (data) {
+                    console.log(data);
+                    if(data == 1) {
+                        alert("로그인 되었습니다.");
+                        window.location = '/member/memberList';
+                    } else {
+                        alert("로그인이 실패하였습니다.");
+                    }
+
+                },
+                error : function (request, status, error) {
+                    // console.clear();
+                    console.log(request.responseText);
+                    alert("code: " + request.status + "\n\n" + "error : " + error);
+
+                }
+            });
+        }
+
     </script>
     <!--  ############### 컨텐츠 끝 #################  -->
 
