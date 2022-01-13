@@ -514,6 +514,8 @@
                         <!-- 오류 메시지 -- End -->
                         <button type="button" onclick="javascript:registering();">가입하기
                         </button>
+                        <br>
+                        <br>
                         <button type="button" onclick="location.href='<%= request.getContextPath() %>/'">취소
                         </button>
                     </li>

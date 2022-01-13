@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Ver2</title>
+    <title>회원 관리</title>
     <style>
     </style>
     <!-- CSS -->
@@ -19,7 +19,8 @@
     <link href="/web_resources/css/scrollbar.css" rel="stylesheet" type="text/css">
     <link href="/web_resources/css/daterangepicker.css" rel="stylesheet" type="text/css">
     <!-- jquery -->
-    <script src="/web_resources/js/jquery-2.1.3.min.js"></script>
+    <%--<script src="/web_resources/js/jquery-2.1.3.min.js"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- javascript(캘린더) -->
     <script src="/web_resources/assets/vendors/general/moment/min/moment.min.js" type="text/javascript"></script>
     <script src="/web_resources/assets/vendors/general/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
@@ -236,12 +237,12 @@
                     <div class="con-box">
                         <!-- 검색영역 시작 -->
                         <div class="search-area w100">
-                      <span class="title_icon fl mgt2 mgr8">
-                        <span class="fa fa-user-friends"></span>
-                      </span>
+                            <span class="title_icon fl mgt2 mgr8">
+                                <span class="fa fa-user-friends"></span>
+                            </span>
                             <span class="txt_result fl fontb">
-                          총 <span class="tix_point">5</span>팀
-                      </span>
+                                총 <span class="tix_point">5</span>팀
+                            </span>
                             <div class="fr">
                                 <input class="w200x mgr8 fl" type="text" placeholder="날짜를 선택하세요" id="daterange" readonly>
                                 <select name="" class="w120x mgr8 fl">
@@ -268,69 +269,42 @@
                         <!-- 테이블 시작 -->
                         <div class="list-area round">
                             <table class="con-list last-noline w100">
+                                <colgroup>
+                                    <col style="width:5%;" />
+                                    <col style="width:16%;" />
+                                    <col style="width:16%;" />
+                                    <col style="width:19%;" />
+                                    <col style="width:25%;" />
+                                    <col style="width:19%;" />
+                                </colgroup>
                                 <thead>
-                                <tr>
-                                    <th>번호</th>
-                                    <th>고객사명</th>
-                                    <th>부서명</th>
-                                    <th>팀명</th>
-                                    <th>정렬</th>
-                                    <th>사용유무</th>
-                                    <th>등록자</th>
-                                    <th>등록일시</th>
-                                </tr>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>아이디</th>
+                                        <th>비밀번호</th>
+                                        <th>이름</th>
+                                        <th>이메일</th>
+                                        <th>등록일시</th>
+                                    </tr>
                                 </thead>
+
                                 <tbody>
-                                <tr>
-                                    <td>5</td>
-                                    <td>야나두</td>
-                                    <td>고객센터1</td>
-                                    <td onclick="teamModPop()">1팀</td>
-                                    <td>1</td>
-                                    <td>Y</td>
-                                    <td>kyunga.jun</td>
-                                    <td>2021-03-04 11:04</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>야나두</td>
-                                    <td>고객센터1</td>
-                                    <td onclick="teamModPop()">2팀</td>
-                                    <td>1</td>
-                                    <td>Y</td>
-                                    <td>kyunga.jun</td>
-                                    <td>2021-03-04 11:04</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>야나두</td>
-                                    <td>고객센터1</td>
-                                    <td onclick="teamModPop()">3팀</td>
-                                    <td>1</td>
-                                    <td>Y</td>
-                                    <td>kyunga.jun</td>
-                                    <td>2021-03-04 11:04</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>야나두</td>
-                                    <td>고객센터2</td>
-                                    <td onclick="teamModPop()">1팀</td>
-                                    <td>2</td>
-                                    <td>Y</td>
-                                    <td>kyunga.jun</td>
-                                    <td>2021-03-04 11:04</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>야나두</td>
-                                    <td>고객센터2</td>
-                                    <td onclick="teamModPop()">2팀</td>
-                                    <td>2</td>
-                                    <td>N</td>
-                                    <td>kyunga.jun</td>
-                                    <td>2021-03-04 11:04</td>
-                                </tr>
+                                    <c:forEach items="${listAllMember}" var="listAll">
+                                        <tr>
+                                            <td><c:out value="${listAll.member_no}"/></td>
+                                                <%-- <td><a href="javascript:selectArticle(${listAll.bno});">${listAll.title}</a></td>--%>
+                                            <td><c:out value="${listAll.member_id}"/></td>
+                                            <td><c:out value="${listAll.member_pw}"/></td>
+                                            <td><c:out value="${listAll.member_name}"/></td>
+                                            <td><c:out value="${listAll.member_email}"/></td>
+                                            <td><fmt:formatDate value="${listAll.member_regdate}" pattern="yyyy-MM-dd a HH:mm"/></td>
+
+                                            <%--<td><c:out value="${listAll.member_regdate}"/></td>--%>
+                                        </tr>
+                                    </c:forEach>
+                                    <div>
+
+                                    </div>
                                 </tbody>
                             </table>
                         </div>

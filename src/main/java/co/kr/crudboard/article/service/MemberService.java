@@ -2,10 +2,13 @@ package co.kr.crudboard.article.service;
 
 
 
+import co.kr.crudboard.article.domain.BoardDTO;
 import co.kr.crudboard.article.domain.MemberDTO;
 import co.kr.crudboard.article.repository.MemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MemberService {
@@ -45,5 +48,11 @@ public class MemberService {
         }
         return check;
     }
+
+    // 03. 회원 목록 보기
+    public List<MemberDTO> listAll() throws Exception {
+        return mDAO.listAll();
+    }
+
 
 }

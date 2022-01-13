@@ -62,7 +62,7 @@
             </c:forEach>
         </div>--%>
             <tr></tr>
-            <th/>
+
         <%--<div>
             <c:if test="${listAllArticle ne null and not empty listAllArticle }">
                 <c:forEach items="${listAllArticle}" var="board">

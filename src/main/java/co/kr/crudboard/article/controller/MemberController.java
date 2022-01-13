@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -30,7 +31,7 @@ public class MemberController {
     }
 
     // 01-2. 로그인 실행 컨트롤러
-    @ResponseBody
+/*    @ResponseBody
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public String ajaxlogin_Member(HttpServletRequest request, Model model) throws Exception {
 
@@ -38,7 +39,7 @@ public class MemberController {
         System.out.println(request.getParameter("member_no"));
         System.out.println(request.getParameter("member_id"));
 
-/*        HttpSession session = request.getSession();*/
+*//*        HttpSession session = request.getSession();*//*
         int check = 0;
         MemberDTO mDTO = new MemberDTO();
         System.out.println(mDTO.toString());
@@ -47,7 +48,7 @@ public class MemberController {
         try {
 
             check =memberService.loginMember(mDTO);
-          /*  MemberDTO check = memberService.loginMember(mDTO);*/
+          *//*  MemberDTO check = memberService.loginMember(mDTO);*//*
 
             mDTO.toString();
             System.out.println("멤버컨트롤러 check 값 확인");
@@ -58,6 +59,47 @@ public class MemberController {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return "member/memberList";
+    }*/
+    @ResponseBody
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String ajaxlogin_Member(HttpServletRequest request) throws Exception {
+
+        System.out.println("로그인실행 컨트롤러 시작");
+        System.out.println(request.getParameter("member_id"));
+        System.out.println(request.getParameter("member_pw"));
+
+        int check = 0;
+/*        String mid = "";
+        String mpw = "";*/
+
+        MemberDTO mDTO = new MemberDTO();
+        mDTO.setMember_id(request.getParameter("member_id"));
+        mDTO.setMember_pw(request.getParameter("member_pw"));
+
+        //Check if username parameter exists
+        if (request.getParameterMap().containsKey("member_id")) {
+            String mid = request.getParameter("member_id");
+        }
+        // Check if password parameter exists
+        if (request.getParameterMap().containsKey("member_pw")) {
+            String member_pw = request.getParameter("member_pw");
+        }
+
+
+        if(mDTO.getMember_id().equals(request.getParameter("member_id"))
+                && mDTO.getMember_pw().equals(request.getParameter("member_pw"))) {
+
+            try {
+                memberService.loginMember(mDTO);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                // TODO: handle exception
+            }
+        } else {
+            return "redirect:/";
         }
         return "member/memberList";
     }
@@ -113,11 +155,20 @@ public class MemberController {
 
 
     // 멤버 목록 불러오기
-    @RequestMapping(value = "/list")
-    public String goToList() throws Exception {
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String goMemberList(Model model) throws Exception {
         System.out.println("------------------------");
         System.out.println("멤버목록화면 이동합니다.");
 
+        try {
+
+            List<MemberDTO> listAll = memberService.listAll();
+            model.addAttribute("listAllMember", listAll);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 

@@ -1,10 +1,13 @@
 package co.kr.crudboard.article.repository;
 
+import co.kr.crudboard.article.domain.BoardDTO;
 import co.kr.crudboard.article.domain.MemberDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class MemberDAO {
@@ -33,5 +36,10 @@ public class MemberDAO {
         return template.insert(NAME_SPACE + ".memberReg", mDTO);
     }
 
+    // 03. 목록보기
+    public List<MemberDTO> listAll() throws Exception {
+        return template.selectList(NAME_SPACE + ".listAllMember");
+
+    }
 
 }
