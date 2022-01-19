@@ -197,7 +197,11 @@
                 <span class="num">5003</span>
             </div>
             <div class="login-ment mgl8 dp_i-b">
-                <span class="fontb mgr4">전경아님</span><span>환영합니다.</span>
+                <span class="fontb mgr4">
+                    <c:if test="${msg == 'success'}">
+                        <h2>${sessionScope.memberName}(${sessionScope.memberId})님 환영합니다.</h2>
+                    </c:if>
+                </span>
             </div>
             <!-- 메인 검색영역 -->
             <div class="main-search">

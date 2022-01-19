@@ -23,6 +23,31 @@
     <script src="/web_resources/assets/app/custom/general/crud/forms/widgets/bootstrap-daterangepicker.js" type="text/javascript"></script>
 
     <link rel="shortcut icon" href="/web_resources/images/favicon.ico" />
+
+    <script>
+        $(document).ready(function(){
+            $("#btnLogin").click(function(){
+                // 태크.val() : 태그에 입력된 값
+                // 태크.val("값") : 태그의 값을 변경
+                let mid = $("#member_id").val();
+                let mpw = $("#member_pw").val();
+                if(mid == ""){
+                    alert("아이디를 입력하세요.");
+                    $("#member_id").focus(); // 입력포커스 이동
+                    return; // 함수 종료
+                }
+                if(mpw == ""){
+                    alert("비밀번호를 입력하세요.");
+                    $("#member_pw").focus();
+                    return;
+                }
+                // 폼 내부의 데이터를 전송할 주소
+                document.loginForm.action="${path}/member/login.do"
+                // 제출
+                document.loginForm.submit();
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -468,7 +493,7 @@
                 <!-- 로그인 정보 입력 --Start -->
 
                 <div>
-                    <form id="loginForm" name="loginForm" >
+                    <form id="loginForm" name="loginForm" method="post">
                         <ul>
                             <li>
                                 <span class="fa fa-user-alt"></span>
@@ -496,9 +521,24 @@
                             <!-- 오류 메시지 -- End -->
                             <%--<button type="button" onclick="errorMsgView()">로그인
                             </button>--%>
-                            <button type="button" onClick="location.href='/member/list'">리스트이동</button>
+                            <%--<button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>--%>
+                            <%--<button type="button" onClick="location.href='/member/list'">리스트이동</button>--%>
                             <hr>
-                            <button type="button" onClick="doLogin()">로그인</button>
+                            <button type="button" id="btnLogin">로그인</button>
+                            <hr>
+                            <c:if test="${msg == 'failure'}">
+                                <div style="color: red">
+                                    아이디 또는 비밀번호가 일치하지 않습니다.
+                                </div>
+                            </c:if>
+                            <c:if test="${msg == 'logout'}">
+                                <div style="color: red">
+                                    로그아웃되었습니다.
+                                </div>
+                            </c:if>
+                            <%--
+                            <button type="button" id="btnLogin" onClick="doLogin()">로그인do</button>
+                        --%>
                         </li>
                         <li>
                             <label><input type="checkbox">
@@ -569,7 +609,7 @@
         }
     </script>
 
-    <script type="text/javascript">
+ <%--   <script type="text/javascript">
 
         $(document).ready(function(){
         });
@@ -605,7 +645,7 @@
             });
         }
 
-    </script>
+    </script>--%>
     <!--  ############### 컨텐츠 끝 #################  -->
 
 </div>

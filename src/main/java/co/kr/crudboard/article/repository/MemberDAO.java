@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Repository
@@ -26,10 +27,25 @@ public class MemberDAO {
 
 
     // 01. 로그인
-    public int loginMember(MemberDTO mDTO) throws Exception {
+ /*   public int loginMember(MemberDTO mDTO) throws Exception {
         System.out.println("멤버DAO 로그인 실행하기");
         return template.selectOne(NAME_SPACE + ".memberLogin", mDTO);
+    }*/
+
+    // 01_01. 회원 로그인체크
+    public boolean loginCheck(MemberDTO mDTO) {
+        String name = sqlSession.selectOne(NAME_SPACE +".loginCheck", mDTO);
+        return (name == null) ? false : true;
     }
+    // 01_02. 회원 로그인 정보
+    public MemberDTO viewMember(MemberDTO mDTO) {
+
+        return sqlSession.selectOne(NAME_SPACE +".viewMember", mDTO);
+    }
+    // 02. 회원 로그아웃
+    public void logout(HttpSession sessin) {
+    }
+
 
     // 02. 회원가입
     public int regMember(MemberDTO mDTO) throws Exception {
