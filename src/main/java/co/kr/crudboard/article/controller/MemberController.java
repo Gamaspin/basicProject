@@ -69,7 +69,7 @@ public class MemberController {
     /*
     @ResponseBody
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
-    public String ajaxlogin_Member(HttpServletRequest request, HttpSession httpSession) throws Exception {
+    public String ajaxlogin_Member(HttpServletRequest request) throws Exception {
 
         System.out.println("로그인실행 컨트롤러 시작");
         System.out.println(request.getParameter("member_id"));
@@ -102,7 +102,6 @@ public class MemberController {
 
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
         } else {
             return "redirect:/";

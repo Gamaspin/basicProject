@@ -57,7 +57,7 @@ public class MemberService {
     // 02. 회원 로그아웃
     public void logout(HttpSession session) {
         // 세션 변수 개별 삭제
-        // session.removeAttribute("userId");
+        // session.removeAttribute("memberId");
         // 세션 정보를 초기화 시킴
         session.invalidate();
     }
